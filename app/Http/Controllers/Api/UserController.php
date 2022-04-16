@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -89,5 +91,25 @@ class UserController extends Controller
         return response([
             'message' => 'User deleted'
         ]);
+    }
+
+    public function custom1()
+    {
+        /*$user=User::find(2);      //Tek bir kayıt dönerken
+        return new UserResource($user);*/
+
+        $users=User::all();          //Birden fazla kayıt dönerken
+        //return UserResource::collection($users);
+
+        //return new UserCollection($users); //collection kullanarak farklı kolonlar eklenebilir.
+
+        return UserResource::collection($users)->additional([
+            'meta'=>[
+                'total_value'=>$users->count(),
+                'custom'=>'value'
+            ]
+        ]);
+
+
     }
 }

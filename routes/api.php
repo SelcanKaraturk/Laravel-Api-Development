@@ -29,6 +29,8 @@ Route::get('deneme',function (){
 Route::get('category/custom1',[CategoryController::class,'custom1']);
 Route::get('category/custom2',[CategoryController::class,'custom2']);
 Route::get('product/report1',[ProductController::class,'report1']);
+Route::get('user/custom1',[UserController::class,'custom1']);
+
 Route::apiResources([
     'product'=>ProductController::class,
     'users'=>UserController::class,
