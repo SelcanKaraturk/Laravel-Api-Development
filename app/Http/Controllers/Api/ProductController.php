@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -105,6 +106,12 @@ class ProductController extends Controller
             ->groupBy('c.name')
             ->get();
         return $data;
+    }
+
+    public function custom1()
+    {
+     $products=Product::paginate(10);
+     return ProductResource::collection($products);
     }
 
 }

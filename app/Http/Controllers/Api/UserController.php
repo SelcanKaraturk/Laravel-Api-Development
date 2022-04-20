@@ -95,15 +95,16 @@ class UserController extends Controller
 
     public function custom1()
     {
-        /*$user=User::find(2);      //Tek bir kayıt dönerken
-        return new UserResource($user);*/
+        $user=User::find(2);      //Tek bir kayıt dönerken
+        //UserResource::withoutWrapping(); //sadece buradaki sorguda data wrapi kaldırır.
+        return new UserResource($user);
 
         $users=User::all();          //Birden fazla kayıt dönerken
         //return UserResource::collection($users);
 
         //return new UserCollection($users); //collection kullanarak farklı kolonlar eklenebilir.
 
-        return UserResource::collection($users)->additional([
+        return UserResource::collection($users)->additional([ //UserCollection kullanmadan ek kolonlar eklenmek istenirse additional kullanılır
             'meta'=>[
                 'total_value'=>$users->count(),
                 'custom'=>'value'
