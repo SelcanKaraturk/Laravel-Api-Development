@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductWithCategoriesResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -112,6 +113,12 @@ class ProductController extends Controller
     {
      $products=Product::paginate(10);
      return ProductResource::collection($products);
+    }
+
+    public function listWithCategories()
+    {
+        $products=Product::paginate(10);
+        return ProductWithCategoriesResource::collection($products);
     }
 
 }

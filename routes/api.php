@@ -31,6 +31,7 @@ Route::get('category/custom2',[CategoryController::class,'custom2']);
 Route::get('product/report1',[ProductController::class,'report1']);
 Route::get('product/custom1',[ProductController::class,'custom1']);
 Route::get('user/custom1',[UserController::class,'custom1']);
+Route::get('product/listwithcategories',[ProductController::class,'listWithCategories']);
 
 Route::apiResources([
     'product'=>ProductController::class,
