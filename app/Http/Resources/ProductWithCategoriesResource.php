@@ -17,7 +17,7 @@ class ProductWithCategoriesResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'categories'=>CategoriesResource::collection($this->category)
+            'categories'=>CategoriesResource::collection($this->whenLoaded('category'))//veri çekilirken with kullanıldıysa ilişkiler gelsin
         ];
     }
 }

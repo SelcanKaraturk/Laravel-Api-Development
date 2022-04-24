@@ -117,7 +117,7 @@ class ProductController extends Controller
 
     public function listWithCategories()
     {
-        $products=Product::paginate(10);
+        $products=Product::with('category')->paginate(10);
         return ProductWithCategoriesResource::collection($products);
     }
 
