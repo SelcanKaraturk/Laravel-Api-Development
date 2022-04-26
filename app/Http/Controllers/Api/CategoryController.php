@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class CategoryController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return response(Category::all());
+        return $this->apiResponse(ResoultType::Success,Category::all(),'Categoriler Çekildi',200);
     }
 
     /**
@@ -30,9 +29,8 @@ class CategoryController extends Controller
         $input = $request->all();
         $input['slug'] = Str::slug($request->name);
         $category = Category::create($input);
-        return response([
-            'data' => $category,
-        ]);
+        return $this->apiResponse($category,'Categoriler oluşturuldu',200);
+
     }
 
     /**
@@ -43,7 +41,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return response($category);
+        return $this->apiResponse($category,'Categorileri çekildi',200);
     }
 
     /**
@@ -58,9 +56,8 @@ class CategoryController extends Controller
         $input=$request->all();
         $input['slug']=Str::slug($request->name);
         $category->update($input);
-        return response([
-            'data'=>$category
-        ]);
+        return $this->apiResponse($category,'Categorileri güncellendi',200);
+
     }
 
     /**
@@ -72,9 +69,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return response([
-            'message'=>'Category deleted'
-        ]);
+        return $this->apiResponse(null,'Categorileri silindi',200);
+
     }
 
     public function custom1()
