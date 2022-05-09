@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductWithCategoriesResource;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class ProductController extends Controller
+class ProductController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -59,11 +60,14 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        if ($product)
-            return $product;
-        else
-            return response(['message' => 'Product Not Found'], 404);
+        try {
+            $product = Product::findOrFail($id);
+            return $this->apiResponse(ResoultType::Success,$product,'Product Found',200);
+        }
+        catch (ModelNotFoundException $exception){
+            return $this->apiResponse(ResoultType::Error,null,'Product Not Found!',404);
+        }
+
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 class CategoryController extends ApiController
@@ -15,6 +16,9 @@ class CategoryController extends ApiController
      */
     public function index()
     {
+        //App::setLocale('tr');
+        $locale = App::currentLocale();
+        return $locale;
         return $this->apiResponse(ResoultType::Success,Category::all(),'Categoriler Çekildi',200);
     }
 

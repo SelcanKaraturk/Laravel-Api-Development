@@ -29,4 +29,11 @@ class UserStoreRequest extends BaseFormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+        'email.unique'=>'Bu kullanıcı daha önce de kaydedilmiştir.'
+        ];
+    }
+
 }

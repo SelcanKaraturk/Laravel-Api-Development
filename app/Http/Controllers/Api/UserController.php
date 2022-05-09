@@ -42,7 +42,7 @@ class UserController extends ApiController
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserStoreRequest $request)
+    public function store(UserStoreRequest $request)//dışarıda validasyon yaparken request değiştirilir
     {
         /*$validator = $this->validate($request, [
             'name' => 'required|string|max:255|min:2',

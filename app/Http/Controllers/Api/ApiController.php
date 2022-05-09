@@ -12,7 +12,9 @@ class ApiController extends Controller
         $response = [];
         $response['success'] = $resultType == ResoultType::Success ? true : false;
 
+        if (isset($data))
         $response['data'] = $data;
+
         $response['message'] = $message;
 
         return response()->json($response, $code);
