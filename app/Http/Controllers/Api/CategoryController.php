@@ -17,8 +17,6 @@ class CategoryController extends ApiController
     public function index()
     {
         //App::setLocale('tr');
-        $locale = App::currentLocale();
-        return $locale;
         return $this->apiResponse(ResoultType::Success,Category::all(),'Categoriler Çekildi',200);
     }
 
